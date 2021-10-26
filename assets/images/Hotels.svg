@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_16075" data-name="Group 16075" transform="translate(-101 -195)">
+    <rect id="Rectangle_290" data-name="Rectangle 290" width="24" height="24" transform="translate(101 195)" fill="#2175bd" opacity="0"/>
+    <g id="Hotel-icon" transform="translate(101 195)">
+      <g id="top" transform="translate(5.105)">
+        <g id="Group_16072" data-name="Group 16072">
+          <path id="Path_1718" data-name="Path 1718" d="M34.3,6.2v3.89h2.69l-.228-1.2L35.6,8.662l1.035-.6-.166-1.221.869.848L38.4,7.152l-.5,1.117.828.89-1.179-.145L36.99,10.09H40.61l-.228-1.2-1.159-.228,1.034-.6-.166-1.221.848.848,1.076-.538-.5,1.117.807.89-1.159-.145L40.61,10.09h3.6l-.228-1.2-1.159-.228,1.035-.6-.166-1.221.869.848,1.055-.538-.5,1.117.828.89-1.179-.145L44.21,10.09h3.021V6.2Z" transform="translate(-34.3 -6.2)" fill="#2175bd"/>
+        </g>
+      </g>
+      <g id="building" transform="translate(3.823 3.972)">
+        <g id="Group_16073" data-name="Group 16073">
+          <path id="Path_1719" data-name="Path 1719" d="M28.1,25V41.8h6.455V35.966h2.586V41.78H43.6V25Zm3.869,13.552H30.024V35.966h1.945Zm0-4.51H30.024V31.455h1.945Zm0-4.531H30.024V26.924h1.945ZM35.2,34.042H33.252V31.455H35.2Zm0-4.531H33.252V26.924H35.2Zm3.228,4.531H36.479V31.455h1.945Zm0-4.531H36.479V26.924h1.945Zm3.248,9.042H39.728V35.966h1.945Zm0-4.51H39.728V31.455h1.945Zm0-4.531H39.728V26.924h1.945Z" transform="translate(-28.1 -25)" fill="#2175bd"/>
+        </g>
+      </g>
+      <rect id="raod" width="24" height="2.586" transform="translate(0 21.414)" fill="#2175bd"/>
+    </g>
+  </g>
+</svg>
