@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 import 'package:conso_customer/extensions_lang.dart';
 
+
+
 class OrderDetails extends StatefulWidget {
   const OrderDetails({Key key}) : super(key: key);
 
@@ -18,7 +20,6 @@ class _OrderDetailsState extends State<OrderDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: myAppBar('orderDetails'.t),
       body: SingleChildScrollView(
         child: Column(
@@ -38,7 +39,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                     return ItemTravelersDetails() ;
-                  },) ,
+                  },
+                  ) ,
                   SizedBox(height: 15.h,),
                   textBodyBigSkinny('trip_details'.t,fontSize: 15.sp,color: defaultHint),
                   SizedBox(height: 5.h,),
@@ -56,6 +58,9 @@ class _OrderDetailsState extends State<OrderDetails> {
     );
   }
 }
+
+
+
 class ItemTravelersDetails extends StatelessWidget {
   const ItemTravelersDetails({Key key}) : super(key: key);
 
@@ -81,11 +86,31 @@ class ItemTravelersDetails extends StatelessWidget {
               children: [
                 buildRowTitleValue('الاسم','Ahmed El-Zabout'),
                 buildRowTitleValue('رقم الجوال','(173)211-2509'),
-                buildRowTitleValue('البريد الالكتروني','denise.vargas@mail.com'),
+                //buildRowTitleValue('البريد الالكتروني','denise.vargas@mail.com'),
+                Padding(
+                  padding: const EdgeInsets.only(left:130),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      textBody("البريد الالكتروني",color: Colors.black),
+                      textBody("denise.vargas@mail.com",color: defaultHint ),
+                    ],
+                  ),
+                ),
                 buildRowTitleValue('تاريخ الميلاد','05/04/1978'),
                 buildRowTitleValue('الجنسية','فلسطينية'),
                 buildRowTitleValue('رقم الجواز','1243213456'),
-                buildRowTitleValue('تاريخ الإصدار-لانتهاء','12/02/2019 - 12/02/2022'),
+               // buildRowTitleValue('تاريخ الإصدار-لانتهاء','12/02/2019 - 12/02/2022'),
+                Padding(
+                  padding: const EdgeInsets.only(left:110),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      textBody("تاريخ الإصدار-لانتهاء",color: Colors.black),
+                      textBody('12/02/2019 - 12/02/2022',color: defaultHint ),
+                    ],
+                  ),
+                ),
 
               ],
             ),

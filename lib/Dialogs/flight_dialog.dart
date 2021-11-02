@@ -7,7 +7,7 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
 import 'package:conso_customer/shared/components/custom_navigate.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _flight_dialogState extends State<FlightDialog> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: defaultButton(
+                      child: DefaultButton(
                         onPressed: () {
                           setState(() {
                             isOne_way = true;
@@ -76,7 +76,7 @@ class _flight_dialogState extends State<FlightDialog> {
                       width: 8.w,
                     ),
                     Expanded(
-                      child: defaultButton(
+                      child: DefaultButton(
                         onPressed: () {
                           setState(() {
                             isOne_way = false;
@@ -195,7 +195,7 @@ class _flight_dialogState extends State<FlightDialog> {
             height: 1,
             color: defaultColor,
           ),
-          defaultButton(
+          DefaultButton(
             background: Colors.white,
             textColor: defaultColor,
             onPressed: () {

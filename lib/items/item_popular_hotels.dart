@@ -17,17 +17,17 @@ class _ItemPopularHotelsState extends State<ItemPopularHotels> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        To(context, HotelDetails()) ;
+        To(context, HotelDetails());
       },
       child: Container(
-        height: 120.h,
+        height: 130.h,
           margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: boxShadow(),
               borderRadius: BorderRadius.circular(10.r)),
-          width: MediaQuery.of(context).size.width * 0.90,
+              width: MediaQuery.of(context).size.width * 0.90,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -55,12 +55,12 @@ class _ItemPopularHotelsState extends State<ItemPopularHotels> {
                         PositionedDirectional(
                             bottom: 10.h,
                             end: 10.h,
-                            child: textBody('456 ريال'))
+                            child: textBody('456 ريال')),
                       ],
                     ),
                   )),
               SizedBox(
-                width: 20.w,
+                width: 15.w,
               ),
               Flexible(
                 flex: 70,
@@ -72,8 +72,10 @@ class _ItemPopularHotelsState extends State<ItemPopularHotels> {
                         'فندق الريف الملز انترناشملز انترناشملز انترناشملز انترناشيونال',
                         color: defaultColor),
                     Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ratingBar(0),
+                        Expanded(
+                            child: ratingBar(0)),
                         textBody('[1650 تقييم]', color: defaultHint)
                       ],
                     ),
@@ -87,7 +89,8 @@ class _ItemPopularHotelsState extends State<ItemPopularHotels> {
                             child: textDetails(
                                 'فندق الريف الملز انترناشيونايف الملز انترناشيونايف الملز انترناشيونايف الملز انترناشيونايف الملز انترناشيونالفن ',
                                 maxline: 1,
-                                color: defaultColor)),
+                                color: defaultColor)
+                        ),
                       ],
                     ),
                   ],

@@ -1,7 +1,7 @@
 import 'package:conso_customer/screens/ServiceProvider/reviews_screen.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
@@ -49,7 +49,7 @@ class _ServiceProvidersDetailsState extends State<ServiceProvidersDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      defaultButton(
+                      DefaultButton(
                         onPressed: () {},
                         fontSize: 15.sp,
                         text: 'start_chatting'.t,
@@ -62,7 +62,7 @@ class _ServiceProvidersDetailsState extends State<ServiceProvidersDetails> {
                       SizedBox(
                         width: 8.w,
                       ),
-                      defaultButton(
+                      DefaultButton(
                           onPressed: () {},
                           fontSize: 15.sp,
                           isExpanded: false,

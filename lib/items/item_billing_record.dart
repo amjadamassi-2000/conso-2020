@@ -1,6 +1,6 @@
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
@@ -22,7 +22,7 @@ class ItemBillingRecord extends StatelessWidget {
               textBodyMedium('خدمة 1',color: defaultHint,textAlign: TextAlign.start,fontSize: 20.sp),
               textBodyMedium('إجمالي السعر : 2121 ريال',color: defaultColor,textAlign: TextAlign.start,fontSize: 20.sp),
               textBodyMedium('اليوم 15 يونيو, 15:35',color: defaultHint,textAlign: TextAlign.start,fontSize: 20.sp),
-              defaultButton(onPressed: (){}, text: 'في انتظار الدفع',isExpanded: false,
+              DefaultButton(onPressed: (){}, text: 'في انتظار الدفع',isExpanded: false,
               height: 35.h,isBorder: true,)
             ],
           ),

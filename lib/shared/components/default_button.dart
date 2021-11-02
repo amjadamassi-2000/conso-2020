@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
-class defaultButton extends StatelessWidget {
+
+class DefaultButton extends StatelessWidget {
 
   Color background = defaultColor;
   Color textColor = Colors.white;
@@ -22,7 +23,7 @@ class defaultButton extends StatelessWidget {
 
 
 
-  defaultButton({
+  DefaultButton({
     this.background = defaultColor,
     this.textColor = Colors.white,
     this.fontSize,
@@ -37,7 +38,7 @@ class defaultButton extends StatelessWidget {
     this.isShadow = true,
     this.toUpper = true,
     this.iconEnd = false,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,6 @@ class defaultButton extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: onPressed,
-
         style: ButtonStyle(
           elevation:MaterialStateProperty.all<double>(0) ,
           foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -76,35 +76,37 @@ class defaultButton extends StatelessWidget {
           padding:  EdgeInsets.symmetric(horizontal: 10.w),
           child: Directionality(
             textDirection:iconEnd ? TextDirection.ltr :TextDirection.rtl ,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                icon != null ? icon : Container(),
-                icon != null
-                    ? SizedBox(
-                  width: 10.w,
-                )
-                    : Container(),
-                isFittedText?
-                FittedBox(
-                  fit: BoxFit.fill,
-                  child: Text(
+            child: Container(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  icon != null ? icon : Container(),
+                  icon != null
+                      ? SizedBox(
+                    width: 5.w,
+                  )
+                      : Container(),
+                  isFittedText?
+                  FittedBox(
+                    fit: BoxFit.fill,
+                    child: Text(
+                      toUpper ? text.toUpperCase() : text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: fontSize ?? 10.sp,
+                        color: isBorder ? background :textColor ,
+                      ),
+                    ),
+                  ): Text(
                     toUpper ? text.toUpperCase() : text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: fontSize ?? 15.sp,
+                      fontSize: fontSize ?? 10.sp,
                       color: isBorder ? background :textColor ,
                     ),
                   ),
-                ): Text(
-                  toUpper ? text.toUpperCase() : text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: fontSize ?? 15.sp,
-                    color: isBorder ? background :textColor ,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

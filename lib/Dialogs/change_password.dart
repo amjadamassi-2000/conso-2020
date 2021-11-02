@@ -1,8 +1,14 @@
+import 'package:conso_customer/modle/User.dart';
+import 'package:conso_customer/modle/base_respons.dart';
 import 'package:conso_customer/screens/Home/select_dates.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
+import 'package:conso_customer/shared/network/remote/WebSarvice.dart';
+import 'package:conso_customer/shared/network/remote/dio_helper.dart';
+import 'package:conso_customer/shared/storage.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +24,45 @@ class ChangePassword extends StatefulWidget {
 class _flight_dialogState extends State<ChangePassword> {
   bool isOne_way = false;
 
-  TextEditingController from = TextEditingController()..text = '';
-  TextEditingController to = TextEditingController()..text = '';
+
+  TextEditingController oldPasswordController = TextEditingController()..text = '';
+
+  TextEditingController newPasswordController = TextEditingController()..text = '';
+
+  TextEditingController confirmPasswordController = TextEditingController()..text = '';
+
+
+  resetPass( ) async {
+    try {
+     // startLoading();
+      Response response = await getResponse(resetPassword, data:
+      {
+        'mobile': getUser().mobile,
+        'email': getUser().email,
+        "password" : newPasswordController.text,
+        "confirm_password" :confirmPasswordController.text,
+      });
+      var res = BaseResponse.fromJson(response.data , keyObject: 'user' , fun: (Map<String, dynamic> json ) {
+        return User.fromJson(json);
+      },
+      );
+      setUser(res.object as User);
+      if (res.status) {
+      Navigator.pop(context);
+      } else {
+        showDialogWithMessage(context, res.message);
+      }
+    }
+    catch (error) {
+     // stopLoading();
+      print(error.toString());
+      showDialogWithMessage(context,'Something went wrong..!');
+    }
+
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +88,34 @@ class _flight_dialogState extends State<ChangePassword> {
                 ),
 
                 defaultTextFormDialog(
-                    from, 'Old_Password'.t,
-                    onTap: () {}, icon: svgImage('password'),isBorder: true),
-                SizedBox(height: 10.h,),
-                defaultTextFormDialog(
-                    from, 'New_Password'.t,
-                    onTap: () {}, icon: svgImage('password'),isBorder: true),
+                    oldPasswordController,
+                  'Old_Password'.t,
+                    icon: svgImage('password'),
+                    isBorder: true,
+                ),
+
                 SizedBox(height: 10.h,),
 
                 defaultTextFormDialog(
-                    from, 'confirm_password'.t,
-                    onTap: () {}, icon: svgImage('password'),isBorder: true),
+                    newPasswordController,
+                    'New_Password'.t,
+                    icon: svgImage('password'),
+                    isBorder: true,
+                ),
+
+                SizedBox(height: 10.h,),
+
+                defaultTextFormDialog(
+                    confirmPasswordController,
+                    'confirm_password'.t,
+                    icon: svgImage('password'),
+                    isBorder: true,
+                ),
 
                 SizedBox(
                   height: 10.h,
                 ),
+
               ],
             ),
           ),
@@ -68,13 +124,15 @@ class _flight_dialogState extends State<ChangePassword> {
             height: 1,
             color: defaultColor,
           ),
-          defaultButton(
+
+          DefaultButton(
             background: Colors.white,
             textColor: defaultColor,
             onPressed: () {
               setState(() {
                 isOne_way = true;
               });
+              resetPass();
             },
             fontSize: 15.sp,
             text: 'change_Password'.t,

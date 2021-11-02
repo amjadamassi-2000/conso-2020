@@ -35,21 +35,17 @@ class _BottomSheetMessagesState extends State<BottomSheetMessages> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 5.w),
               decoration: BoxDecoration(
-               // borderRadius: BorderRadius.circular(25),
                 boxShadow: boxShadow(),
                 color: Colors.white
-                //color: AppShared.appTheme['MessagingBox'],
               ),
-              //margin: AppStyles.defaultPadding2,
               child: Row(
                 children: [
-
                   Expanded(
                     child: defaultTextFormDialog(TextEditingController(), 'اكتب شيئا',size: 16.sp),
                   ),
+
                   InkWell(
                     onTap: () async {
-
                     },
                     child: Icon(Icons.arrow_forward,color: defaultColor,size: 30.r,),
                   ),

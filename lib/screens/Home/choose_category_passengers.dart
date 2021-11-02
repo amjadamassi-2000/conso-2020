@@ -2,7 +2,7 @@ import 'package:conso_customer/items/itemCount.dart';
 import 'package:conso_customer/modle/travelers.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,7 +84,7 @@ class _ChooseCategoryPassengersState extends State<ChooseCategoryPassengers> {
 
                   scrollDirection: Axis.vertical,
                   children: [
-                    defaultButton(
+                    DefaultButton(
                         fontSize: 12.sp,
                         isShadow: false,
                         onPressed: () {
@@ -95,7 +95,7 @@ class _ChooseCategoryPassengersState extends State<ChooseCategoryPassengers> {
                         text: types[0],
                         isBorder: select != 0,
                         height: 40.h),
-                    defaultButton(
+                    DefaultButton(
                         fontSize: 12.sp,
                       isShadow: false,
                         onPressed: () {
@@ -106,7 +106,7 @@ class _ChooseCategoryPassengersState extends State<ChooseCategoryPassengers> {
                         text: types[1],
                         isBorder: select != 1,
                         height: 40.h),
-                    defaultButton(
+                    DefaultButton(
                         fontSize: 12.sp,
                         isShadow: false,
                         onPressed: () {
@@ -117,7 +117,7 @@ class _ChooseCategoryPassengersState extends State<ChooseCategoryPassengers> {
                         text: types[2],
                         isBorder: select != 2,
                         height: 40.h),
-                    defaultButton(
+                    DefaultButton(
                       fontSize: 12.sp,
 
                         isShadow: false,
@@ -151,7 +151,7 @@ class _ChooseCategoryPassengersState extends State<ChooseCategoryPassengers> {
                 //
                 // ),
                 SizedBox(height: 20.h,) ,
-                defaultButton(text: 'confirm'.t,onPressed:(){
+                DefaultButton(text: 'confirm'.t,onPressed:(){
                   setState(() {
                     travelerss.add( Travelers("dodd" , 55),) ;
                   });

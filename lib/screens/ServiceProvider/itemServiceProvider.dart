@@ -1,6 +1,6 @@
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +44,7 @@ class itemServiceProviders extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        defaultButton(
+                        DefaultButton(
                           onPressed: () {},
                           fontSize: 15.sp,
                           text: 'start_chatting'.t,
@@ -55,7 +55,7 @@ class itemServiceProviders extends StatelessWidget {
                         SizedBox(
                           width: 8.w,
                         ),
-                        defaultButton(
+                        DefaultButton(
                             onPressed: () {},
                             fontSize: 15.sp,
                             isExpanded: false,

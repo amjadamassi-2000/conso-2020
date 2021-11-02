@@ -1,4 +1,7 @@
 
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -135,5 +138,17 @@ class Helpers {
     bool res = await FlutterPhoneDirectCaller.callNumber('00$number');
   }
 
+
+
+//  Future<String> uploadImage(String url,File file) async {
+//    String fileName = file.path.split('/').last;
+//    FormData formData = FormData.fromMap({
+//      "file":
+//      await MultipartFile.fromFile(file.path, filename:fileName),
+//    });
+//
+//    response = await dio.post(url, data: formData);
+//    return response.data['id'];
+//  }
 
 }

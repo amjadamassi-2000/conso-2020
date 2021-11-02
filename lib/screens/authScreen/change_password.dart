@@ -2,7 +2,7 @@ import 'package:conso_customer/screens/adsScreen/ads_notifier.dart';
 import 'package:conso_customer/screens/adsScreen/slide_item.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,7 +52,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               ) ,
             ),
             SizedBox(height: 20.h,) ,
-            defaultButton(text: 'sign_in'.t,onPressed:(){
+            DefaultButton(text: 'sign_in'.t,onPressed:(){
 
             }),
             Spacer(flex: 20,),

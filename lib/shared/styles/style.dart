@@ -21,20 +21,20 @@ TextStyle defaultTextStyle() =>
     );
 
 TextStyle defaultTextStyleTitle() =>
-    TextStyle(fontSize: 18.sp,
+    TextStyle(fontSize: 17.sp,
 
       color: Colors.white,
       fontWeight: FontWeight.w800,
     );
 
 TextStyle defaultTextStyleBody({isBold = false}) =>
-    TextStyle(fontSize: 18.sp,
+    TextStyle(fontSize: 14.sp,
 
       color: Colors.white,
       fontWeight:isBold? FontWeight.w900 :FontWeight.w700,
     );
 TextStyle defaultTextStyleHint() =>
-    TextStyle(fontSize: 18.sp,
+    TextStyle(fontSize: 14.sp,
       color: defaultHint,
       fontWeight:FontWeight.w600,
 

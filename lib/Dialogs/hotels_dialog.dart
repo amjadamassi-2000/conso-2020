@@ -8,7 +8,7 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
 import 'package:conso_customer/shared/components/custom_navigate.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +146,7 @@ class _flight_dialogState extends State<hotels_dialog> {
             height: 1,
             color: defaultColor,
           ),
-          defaultButton(
+          DefaultButton(
             background: Colors.white,
             textColor: defaultColor,
             onPressed: () {

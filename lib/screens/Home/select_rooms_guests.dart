@@ -3,7 +3,7 @@ import 'package:conso_customer/items/itemRoom.dart';
 import 'package:conso_customer/modle/travelers.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -108,7 +108,7 @@ class _SelectRoomsGuestsState extends State<SelectRoomsGuests> {
                   ],),
                 ),
                 SizedBox(height: 20.h,) ,
-                defaultButton(text: 'confirm'.t,onPressed:(){
+                DefaultButton(text: 'confirm'.t,onPressed:(){
 
 
                 }),

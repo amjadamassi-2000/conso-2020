@@ -1,6 +1,7 @@
+import 'package:conso_customer/modle/User.dart';
 import 'package:get_storage/get_storage.dart';
 
-class MyStorage {
+
   // static void setLang(String lang) {
   //   GetStorage().write("lang", lang);
   // }
@@ -9,17 +10,33 @@ class MyStorage {
   //   GetStorage().write("token", token);
   // }
   //
-  static String getToken() {
+
+   String getToken() {
     return GetStorage().read("token");
   }
+
+
+
   //
   // static void setUserToken(String token) {
   //   GetStorage().write("user_token", token);
   // }
   //
-  static String getUserToken() {
-    return GetStorage().read("user_token");
+
+
+
+
+   String getUserToken() {
+    return getUser()!=null ? getUser().accessToken : '';
   }
+
+
+
+
+
+
+
+
   //
   // static void setSetting(Setting settings) {
   //   GetStorage().write("settings", settings.toJson());
@@ -43,19 +60,32 @@ class MyStorage {
   //   GetStorage().remove("user");
   // }
   //
-  // static void setUser(User user) {
-  //   GetStorage().write("user", user.toJson());
-  //   // GetStorage().writeInMemory("user", user);
-  // }
+
+
+    void setUser(User user) {
+     GetStorage().write("user", user.toJson());
+   }
+
+
+
   //
-  static String getlang() {
+   String getlang() {
     return GetStorage().hasData("lang")
         ? GetStorage().read("lang")
         :'ar';
   }
   //
-  // static User getUser() {
-  //   return User.fromJson(GetStorage().read("user"));
-  //   return GetStorage().read<User>("user");
-  // }
+    User getUser() {
+     try{
+       return User.fromJson(GetStorage().read("user"));
+     }catch(e){
+       return null ;
+     }
+}
+
+
+
+
+removeUser(){
+  GetStorage().remove("user");
 }

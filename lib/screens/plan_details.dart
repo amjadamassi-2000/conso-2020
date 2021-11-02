@@ -4,7 +4,7 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/Constant.dart';
 import 'package:conso_customer/shared/components/LineDashedPainter.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/styles/style.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
@@ -164,7 +164,7 @@ class Tab1 extends StatelessWidget {
         ) ,
         SizedBox(height: 20.h,),
         Center(
-          child: defaultButton(
+          child: DefaultButton(
             // fontSize: 20.sp,
               isShadow: false,
               isExpanded: false,

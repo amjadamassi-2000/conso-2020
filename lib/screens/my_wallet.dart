@@ -2,7 +2,7 @@ import 'package:conso_customer/Dialogs/added_value.dart';
 import 'package:conso_customer/screens/edit_my_wallet.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:conso_customer/extensions_lang.dart';
@@ -40,7 +40,7 @@ class _MyWalletState extends State<MyWallet> {
                   SizedBox(height: 5.h,),
                   textBodyMedium('150 ريال',fontSize: 40.sp,isBold: true),
                   SizedBox(height: 5.h,),
-                  defaultButton(onPressed: (){
+                  DefaultButton(onPressed: (){
                     showAddBalanceDialog(context) ;
                   }, text: 'add_credit'.t,
                   isBorder: true,

@@ -9,7 +9,7 @@ import 'package:conso_customer/screens/offer_details.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_code_fields.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_theme.dart';
 import 'package:conso_customer/shared/styles/style.dart';

@@ -1,7 +1,7 @@
 import 'package:conso_customer/items/item_record_bokings.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
@@ -41,7 +41,7 @@ class _RecordBookingsState extends State<RecordBookings>  with SingleTickerProvi
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                defaultButton(
+                DefaultButton(
                   onPressed: () {
                     controller.index = 0;
                     setState(() {
@@ -60,7 +60,7 @@ class _RecordBookingsState extends State<RecordBookings>  with SingleTickerProvi
                 SizedBox(
                   width: 8.w,
                 ),
-                defaultButton(
+                DefaultButton(
                   onPressed: () {
                     controller.index = 1;
                     setState(() {

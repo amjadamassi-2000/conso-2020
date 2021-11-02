@@ -6,7 +6,7 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
 import 'package:conso_customer/shared/components/custom_navigate.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_code_fields.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_theme.dart';
 import 'package:conso_customer/shared/styles/style.dart';
@@ -45,7 +45,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               textBodyMedium('You_have_successfully_registered'.t,isBold: true , ),
             ) ,
             SizedBox(height: 20.h,) ,
-            defaultButton(text: 'continue'.t,onPressed:(){
+            DefaultButton(text: 'continue'.t,onPressed:(){
               CustomNavigate<HomeNotifier>().navigateAndFinish(context,  HomeScreen(), create: (context) =>HomeNotifier());
 
             }),

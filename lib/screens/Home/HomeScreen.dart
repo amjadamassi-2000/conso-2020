@@ -1,8 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conso_customer/Dialogs/TutorialOverlay.dart';
 import 'package:conso_customer/Dialogs/flight_dialog.dart';
 import 'package:conso_customer/Dialogs/hotels_dialog.dart';
 import 'package:conso_customer/items/item_popular_hotels.dart';
+import 'package:conso_customer/modle/base_respons.dart';
+import 'package:conso_customer/modle/User.dart';
+import 'package:conso_customer/modle/offer.dart';
 import 'package:conso_customer/screens/ServiceProvider/itemServiceProviderV2.dart';
 import 'package:conso_customer/screens/ServiceProvider/service_notifier.dart';
 import 'package:conso_customer/screens/ServiceProvider/service_providerScreen.dart';
@@ -10,9 +12,13 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/AppExpansionTile.dart';
 import 'package:conso_customer/shared/components/components.dart';
 import 'package:conso_customer/shared/components/custom_navigate.dart';
+import 'package:conso_customer/shared/network/remote/WebSarvice.dart';
+import 'package:conso_customer/shared/network/remote/dio_helper.dart';
+import 'package:conso_customer/shared/storage.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:conso_customer/extensions_lang.dart';
@@ -33,29 +39,43 @@ class _HomeScreenState extends State<HomeScreen> {
     'Newer_Consultants'.t,
     'Only_Consultants_Available'.t
   ];
-
   bool isExpanded = false;
-  final GlobalKey<AppExpansionTileState> expansionTile = new GlobalKey();
+  final GlobalKey<AppExpansionTileState> expansionTile =  GlobalKey();
   HomeNotifier home;
-
   HomeNotifier homeWithListen;
+   // API =======================
+  Future getOffers;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     home = Provider.of<HomeNotifier>(context, listen: false);
+
+
+    // API =======================
+    getOffers = getListData(getAds,'data', fun: (json) {
+    return Offer.fromJson(json);
+    },);
+
+
   }
+
+
+
   void _showOverlay(BuildContext context) {
     Navigator.of(context).push(TutorialOverlay());
   }
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     homeWithListen = Provider.of<HomeNotifier>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      
       appBar: myAppBar(home.name),
       endDrawer: NavDrawer(),
       body: ListView(
@@ -67,21 +87,27 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+
                   Row(
                     children: [
-                      Expanded(child: buildView('Hotels', 'Hotels'.t,(){
-                         showHotelsDialog(context) ;
-                       // _showOverlay(context);
-                      })),
-                      Expanded(child: buildView('Flight', 'Flight'.t,(){
-                        showFlightDialog(context) ;
+                      Expanded(
+                          child: buildView('Hotels', 'Hotels'.t, () {
+                        showHotelsDialog(context);
+                        // _showOverlay(context);
+                      })
+                      ),
 
-                      }))
+                      Expanded(
+                          child: buildView('Flight', 'Flight'.t, () {
+                        showFlightDialog(context);
+                      })
+                      ),
                     ],
                   ),
-                  buildView('Bookadvisor', 'Book_advisor'.t,(){
 
-                  }),
+
+
+                  buildView('Bookadvisor', 'Book_advisor'.t, () {}),
                   // buildView()
                 ],
               ),
@@ -89,44 +115,66 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           divider('Offers'.t),
           listAds(),
+
           divider('Popular_Hotels'.t),
           listPopularHotels(),
+
           divider('Top_destinations'.t),
           listTopDestinations(),
-          divider('Consultants'.t,isShowBtn: true , onTap: (){
-            CustomNavigate<ServiceNotifier>().navigateTo(context,  ServiceProviderScreen(), create: (context) =>ServiceNotifier());
-          }),
-          listConsultants() ,
 
-          SizedBox(height: 20.h,)
+          divider('Consultants'.t, isShowBtn: true, onTap: () {
+            CustomNavigate<ServiceNotifier>().navigateTo(
+                context, ServiceProviderScreen(),
+                create: (context) => ServiceNotifier());
+          }),
+          listConsultants(),
+          SizedBox(
+            height: 20.h,
+          )
         ],
       ),
     );
   }
 
+  // Offers ====================================================
+  Widget listAds() => FutureBuilder(
+    future:  getOffers,
+    builder: (context, snapshot) {
+      if(snapshot.hasData){
+       List<dynamic> offers =snapshot.data ;
 
-  Widget listAds() => Container(
-        height: 100.h,
-        child: ListView.builder(
-            // physics: NeverScrollableScrollPhysics(),
-            // shrinkWrap: false,
-            itemCount: 10,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.w),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
-                width: MediaQuery.of(context).size.width * 0.90,
-                child: imageNet('https://miro.medium.com/max/12000/1*PgIo7r6qQXem8BmWd-vksQ.jpeg') /*Image.network(
-                  'https://miro.medium.com/max/12000/1*PgIo7r6qQXem8BmWd-vksQ.jpeg',
-                  fit: BoxFit.cover,
-                )*/,
-              );
-            }),
-      );
+        return Container(
+          height: 100.h,
+          child: ListView.builder(
+              itemCount: offers.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.w),
+                  clipBehavior: Clip.hardEdge,
+                  decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  child: imageNet(
+                      offers[index].image),
+                );
+              }),
+        );
+      }else{
 
-  Widget buildView(icon, text ,Function function) {
+      }
+      return SpinKitFadingCube(
+        color: defaultColor,
+        size: 50.0,
+      ) ;
+
+    }
+  );
+
+
+
+
+  Widget buildView(icon, text, Function function) {
     return InkWell(
       onTap: function,
       child: Container(
@@ -143,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget listPopularHotels() => Container(
-height: 150.h,
+        height: 150.h,
         child: ListView.builder(
             // physics: NeverScrollableScrollPhysics(),
             // shrinkWrap: false,
@@ -155,58 +203,54 @@ height: 150.h,
       );
 
   Widget listTopDestinations() => Container(
-    height: 100.h,
-
-    child: ListView.builder(
-      // physics: NeverScrollableScrollPhysics(),
-      // shrinkWrap: false,
-        itemCount: 10,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) {
-          return Container(
-              margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: boxShadow(),
-                  borderRadius: BorderRadius.circular(10.r)),
-              width: 100.h,
-              child: Container(
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child:imageNet('https://miro.medium.com/max/12000/1*PgIo7r6qQXem8BmWd-vksQ.jpeg')
-                    ),
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient:LinearGradient(
-                              colors: [Colors.black87 , Colors.transparent, Colors.transparent],
+        height: 100.h,
+        child: ListView.builder(
+            itemCount: 10,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: boxShadow(),
+                      borderRadius: BorderRadius.circular(10.r)),
+                  width: 100.h,
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                            child: imageNet(
+                                'https://miro.medium.com/max/12000/1*PgIo7r6qQXem8BmWd-vksQ.jpeg')),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                              colors: [
+                                Colors.black87,
+                                Colors.transparent,
+                                Colors.transparent
+                              ],
                               begin: AlignmentDirectional.bottomEnd,
                               end: AlignmentDirectional.topStart,
-                            )
+                            )),
+                          ),
                         ),
-                      ),
-                    ) ,
-                    PositionedDirectional(
-                        bottom: 10.h,
-                        end: 10.h,
-                        child: textBody('جدة'))
-                  ],
-                ),
-              ));
-        }),
-  );
+                        PositionedDirectional(
+                            bottom: 10.h, end: 10.h, child: textBody('جدة'))
+                      ],
+                    ),
+                  ));
+            }),
+      );
 
   Widget listConsultants() => Container(
-     height: 250.h,
-    child: ListView.builder(
-        itemCount: 10,
-
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) {
-          return itemServiceProvidersV2();
-        }),
-  );
-
+        height: 250.h,
+        child: ListView.builder(
+            itemCount: 10,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              return itemServiceProvidersV2();
+            }),
+      );
 }

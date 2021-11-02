@@ -1,31 +1,70 @@
-import 'package:conso_customer/screens/adsScreen/ads_notifier.dart';
-import 'package:conso_customer/screens/adsScreen/slide_item.dart';
+import 'package:conso_customer/modle/base_respons.dart';
+import 'package:conso_customer/modle/User.dart';
+import 'package:conso_customer/my_widgets/custom_botton.dart';
+import 'package:conso_customer/screens/Home/HomeScreen.dart';
+import 'package:conso_customer/screens/authScreen/sign_up_screen.dart';
 import 'package:conso_customer/screens/authScreen/success_screen.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/ScrollColumnExpandable.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
+import 'package:conso_customer/shared/network/remote/WebSarvice.dart';
+import 'package:conso_customer/shared/network/remote/dio_helper.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_code_fields.dart';
 import 'package:conso_customer/shared/pinCodeCustom/pin_theme.dart';
-import 'package:conso_customer/shared/styles/style.dart';
+import 'package:conso_customer/shared/storage.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:page_view_indicators/circle_page_indicator.dart';
-
-import 'package:provider/provider.dart';
 import 'package:conso_customer/extensions_lang.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../app_notifier.dart';
 
 class VerifiScreen extends StatefulWidget {
+
+  TextEditingController mobile;
+  VerifiScreen({this.mobile});
+
   @override
   _VerifiScreenState createState() => _VerifiScreenState();
 }
 
 class _VerifiScreenState extends State<VerifiScreen> {
 
+
   String code ;
+  User _user;
+
+  sendVerificationCode(startLoading, stopLoading, btnState ) async {
+    print('track 1${widget.mobile.text}') ;
+      try {
+        startLoading();
+        Response response = await getResponse(checkCode, data:
+        {
+          'mobile': widget.mobile.text,
+          'code': code,
+           "type" : 1,
+        });
+        var res = BaseResponse.fromJson(response.data , keyObject: 'user' , fun: (Map<String, dynamic> json ) {
+          return User.fromJson(json);
+        },
+        );
+        setUser(res.object as User);
+        if (res.status) {
+          To(context, SuccessScreen());
+        } else {
+          showDialogWithMessage(context, res.message);
+        }
+      }
+      catch (error) {
+        stopLoading();
+        print(error.toString());
+        showDialogWithMessage(context,'error.message');
+      }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +80,6 @@ class _VerifiScreenState extends State<VerifiScreen> {
               width: double.infinity,
               child: Card(
                 clipBehavior:Clip.hardEdge ,
-               // margin: EdgeInsets.symmetric(horizontal: 20.w),
                 shape:RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r)
                 ) ,
@@ -50,13 +88,13 @@ class _VerifiScreenState extends State<VerifiScreen> {
                   child: Column(
                     children: [
                       textBody('Please_enter_activation_code'.t ,color: defaultColor),
-                    SizedBox(height: 10.h,) ,
+                    SizedBox(height: 10.h,),
                       PinCodeTextField(
+
                         length: 4,
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          animationType: AnimationType.fade,
-
-                        pinTheme: PinTheme(
+                          pinTheme: PinTheme(
                           fieldOuterPadding: EdgeInsets.symmetric(horizontal: 5),
                           selectedColor: Colors.grey,
                           activeColor: Colors.grey,
@@ -66,26 +104,24 @@ class _VerifiScreenState extends State<VerifiScreen> {
                           borderRadius: BorderRadius.circular(10),
                           fieldHeight: 45.w,
                           fieldWidth: 45.w,
-
-                            disabledColor:  Colors.grey,
-
+                          disabledColor:  Colors.grey,
                           inactiveFillColor: Colors.grey,
-                             selectedFillColor:  Colors.grey,
-                           inactiveColor:  Colors.grey,
-
+                          selectedFillColor:  Colors.grey,
+                          inactiveColor:  Colors.grey,
                         ),
                         textStyle: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w600),
-
                         animationDuration: Duration(milliseconds: 300),
-                        //  backgroundColor: Colors.blue.shade50,
+                        //backgroundColor: Colors.blue.shade50,
                         enableActiveFill: false,
-
                         onCompleted: (v) {
                           print("Completed");
                         },
                         onChanged: (value) {
                           print(value);
-                          code = value;
+//                        if(code.isEmpty) {
+//                          showDialogWithMessage(context, "pleas enter verification code");
+//                         } else
+                         code = value;
                         },
                         beforeTextPaste: (text) {
                           print("Allowing to paste $text");
@@ -96,8 +132,11 @@ class _VerifiScreenState extends State<VerifiScreen> {
                       ),
                       Row(
                         children: [
-                          textBody('01:25',isBold: true ,color: defaultColor) ,
-                          Spacer() ,
+
+                          textBody('01:25',isBold: true ,color: defaultColor),
+
+                          Spacer(),
+
                           textBody('Resend_Code'.t, color: defaultColor) ,
                         ],
                       )
@@ -106,10 +145,20 @@ class _VerifiScreenState extends State<VerifiScreen> {
                 ) ,
               ),
             ),
-            SizedBox(height: 20.h,) ,
-            defaultButton(text: 'sign_up'.t,onPressed:(){
-              To(context, SuccessScreen()) ;
-            }),
+            SizedBox(height: 20.h,),
+
+
+
+//            DefaultButton(text: 'sign_up'.t,onPressed:(){
+//              To(context, SuccessScreen()) ;
+//            }),
+
+            CustomBtnComponent(
+                text: 'sign_up'.t,
+                onTap: (startLoading, stopLoading, btnState) {
+                  sendVerificationCode(startLoading, stopLoading, btnState);
+                }),
+
 
             Spacer(flex: 20,),
           ],

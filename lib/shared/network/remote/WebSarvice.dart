@@ -1,35 +1,31 @@
 import 'dart:async' ;
-import 'dart:developer';
-import 'dart:html';
-
-import 'package:conso_customer/shared/storage.dart';
-import 'package:dio/dio.dart' ;
 import 'package:easy_localization/easy_localization.dart' as lang;
 
 import 'package:flutter/material.dart' ;
 import 'package:get/get.dart'hide Response ,FormData;
 import 'package:progress_dialog/progress_dialog.dart';
-import 'package:conso_customer/extensions_lang.dart';
-
-import 'dio_helper.dart';
-
-class WebService {
-  //static const String domain = 'http://46.101.219.156/api/V2/';
-  static const String domain = 'http://167.172.177.20/api/V1/';
-
-  // static const String domain = 'http://svp-beta.xyz/api/V1/';
-  static const String login = domain + 'customer/login';
-  static const String sign_up = domain + 'customer/sign-up';
 
 
 
+   const String domain = 'http://www.conso.hexacit.com/api/V1/';
+   const String userLogin = 'userLogin';
+   const String userSignUp = 'userSignUp';
+   const String checkCode = 'checkCode';
+   const String doYouForgetPassword = 'requestNewCode';
+   const String userImageProfile = 'userImageProfile';
+   const String resetPassword = 'resetPassword';
+   const String userEditProfile = 'userEditProfile';
+
+   const String getAds = 'getAds';
 
 
-  static const String GoogleKey = 'AIzaSyBm-bSOgvL17sfF6sm4SO8EDHrEf9aYLk4';
 
-   static ProgressDialog pr;
 
-  static Future<bool> showLoading() {
+   const String GoogleKey = 'AIzaSyBm-bSOgvL17sfF6sm4SO8EDHrEf9aYLk4';
+
+    ProgressDialog pr;
+
+   Future<bool> showLoading() {
     print("status : show");
     if (pr == null) {
       pr = ProgressDialog(
@@ -43,7 +39,7 @@ class WebService {
     return pr.show();
   }
 
-  static void hideLoading() {
+   void hideLoading() {
 
     if (pr != null&&pr.isShowing()) {
       pr.hide() ;
@@ -54,9 +50,9 @@ class WebService {
     }
   }
 
-  static void showDialogWithMessage(String title) {
+   showDialogWithMessage(BuildContext context,String title) {
     showDialog(
-        context: Get.overlayContext,
+        context: context,
         builder: (context) => new AlertDialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
@@ -85,110 +81,16 @@ class WebService {
     //  );
   }
 
-  getMap()=> {
-    "fcmToken": MyStorage.getToken(),
-    'Authorization': 'Bearer ${MyStorage.getUserToken()}',
-    'Accept': 'application/json',
-    'Accept-Language': MyStorage.getlang(),
-  } ;
+//  getMap()=> {
+//    "fcmToken": MyStorage.getToken(),
+//    'Authorization': 'Bearer ${MyStorage.getUserToken()}',
+//    'Accept': 'application/json',
+//    'Accept-Language': MyStorage.getlang(),
+//  } ;
 
-  Future actionPost(String url,Map<String,dynamic> type) async {
-    await WebService.showLoading() ;
-    try{
-      Response response = await DioHelper.dio.post(
-        url,
-        data: FormData.fromMap(type) ,
-        options: Options(
-          headers:getMap(),
-        ),
-      );
-
-      print(' ++=> ${response.toString()}');
-      WebService.hideLoading();
-      if (response.data['status']) {
-        return response.data;
-      } else if(response.data['code'].toString() == "401") {
-        // Mypref.removeUser() ;
-        // Mypref.setIsLogin(false);
-        // Get.offAll(login_screen());
-      }else{
-        WebService.showDialogWithMessage(response.data['message']) ;
-        return null;
-      }
-    } on DioError catch (e) {
-      print(e.error.toString());
-      print(e.message.toString());
-      log(e.response.toString());
-      print(e.type.toString());
-      print('DioError ${e.toString()}');
-    }
-  }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-  Future actionGet(String url,{isLoding = true}) async {
-    if(isLoding) await WebService.showLoading() ;
-    try{
-
-
-      print(url) ;
-      Response response = await DioHelper.dio.get(
-        url,
-        options: Options(
-          headers: getMap(),
-        ),
-      );
-
-      print(' ++=> ${response.toString()}');
-      if(isLoding)  WebService.hideLoading();
-      if (response.data['status']) {
-        return response.data;
-      }else{
-        WebService.showDialogWithMessage(response.data['message']) ;
-        return null;
-      }
-    } on DioError catch (e) {
-      print(e.error.toString());
-      print(e.message.toString());
-      print(e.response.toString());
-      print(e.type.toString());
-      print('never reached');
-      if(isLoding)  WebService.hideLoading();
-      WebService.showDialogWithMessage('messageErorr'.t) ;
-
-    }
-  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  Future getData(String url , String type) async {
-    //await WebService.showLoading() ;
-    try{
-      Response response = await DioHelper.dio.get(
-        url,
-        options: Options(
-          headers: getMap(),
-        ),
-      );
-
-      log('$type  ++=> ${response.toString()}');
-      log('$type  ++=> ${response.headers.toString()}');
-      // WebService.hideLoading();
-      if (response.data['status']) {
-        //return response.data ;
-        // List<Address> shifts=  List<Address>.from(response.data['shifts'].map((x) => Shift.fromJson(x)));
-      //  await Future.delayed(Duration(milliseconds: 500), () {});
-        return response.data[type];
-      }else{
-        WebService.showDialogWithMessage(response.data['message']) ;
-        return "";
-      }
-    }  on DioError catch (e) {
-      print(e.error.toString());
-      print(e.message.toString());
-      print(e.response.toString());
-      print(e.type.toString());
-      print('never reached');
-      throw '';
-    }
-  }
 
 
-}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+

@@ -1,6 +1,6 @@
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,7 +128,7 @@ class _NavDrawerSearchState extends State<NavDrawerSearchPlan> {
               height: 20.h,
             ),
             Center(
-              child: defaultButton(
+              child: DefaultButton(
                 // fontSize: 20.sp,
                   isShadow: false,
                   isExpanded: false,

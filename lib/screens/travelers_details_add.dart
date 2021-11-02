@@ -2,7 +2,7 @@ import 'package:conso_customer/items/item_plane_details.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/cardFormArrow.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/components/my_form_clickable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +147,7 @@ class _TravelersDetailsAddState extends State<TravelersDetailsAdd> {
                     ),
                   ),
                   SizedBox(height: 20.h,) ,
-                  defaultButton(onPressed: (){}, text: 'Add_traveler'.t),
+                  DefaultButton(onPressed: (){}, text: 'Add_traveler'.t),
                   SizedBox(height: 10.h,) ,
                 ],
               ),

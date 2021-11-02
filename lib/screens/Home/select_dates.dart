@@ -5,7 +5,7 @@ import 'package:conso_customer/modle/travelers.dart';
 import 'package:conso_customer/screens/ServiceProvider/itemServiceProvider.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +103,7 @@ class _SelectDatesState extends State<SelectDates> {
                 SizedBox(
                   height: 20.h,
                 ),
-                defaultButton(text: 'confirm'.t,onPressed:(){
+                DefaultButton(text: 'confirm'.t,onPressed:(){
                   Navigator.pop(context,dateRange);
                 }),
                 SizedBox(height: 20.h,) ,

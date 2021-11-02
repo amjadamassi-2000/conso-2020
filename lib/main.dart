@@ -12,6 +12,7 @@ import 'package:conso_customer/screens/authScreen/sign_up_screen.dart';
 import 'package:conso_customer/screens/authScreen/success_screen.dart';
 import 'package:conso_customer/shared/Helpers.dart';
 import 'package:conso_customer/shared/components/custom_navigate.dart';
+import 'package:conso_customer/shared/storage.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:conso_customer/screens/adsScreen/ads_screen.dart';
@@ -31,7 +32,7 @@ import 'package:flutter_screenutil/size_extension.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  initApp() ;
+  initApp();
 
   //PushNotificationService().initialise() ;
   await GetStorage.init();
@@ -61,6 +62,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Offset _offset = Offset.zero;
+
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -78,10 +83,12 @@ class _MyAppState extends State<MyApp> {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
             locale: Locale('ar') ,
+
+
+
             theme: ThemeData(
             appBarTheme: AppBarTheme(
-
-              textTheme: TextTheme(headline6:TextStyle(color: Colors.white ,fontSize: 20, fontFamily: 'Cairo',fontWeight: FontWeight.w800 )  ),
+              textTheme: TextTheme(headline6:TextStyle(color: Colors.white ,fontSize: 18, fontFamily: 'Cairo',fontWeight: FontWeight.w800 )  ),
               iconTheme: IconThemeData(color: Colors.white),
               brightness: Brightness.dark,
             ),
@@ -95,15 +102,24 @@ class _MyAppState extends State<MyApp> {
 
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: MaterialApp(
-          //title: 'Flutter Demo',
+
+
+
+
+
+          home:
+
+
+
+          MaterialApp(
+
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: Locale('ar') /*context.locale*/,
             theme: ThemeData(
               appBarTheme: AppBarTheme(
-                textTheme: TextTheme(headline6:TextStyle(color: Colors.white ,fontSize: 20, fontFamily: 'Cairo',fontWeight: FontWeight.w800 )  ),
+                textTheme: TextTheme(headline6:TextStyle(color: Colors.white ,fontSize: 18, fontFamily: 'Cairo',fontWeight: FontWeight.w800 )  ),
                 iconTheme: IconThemeData(color: Colors.white),
                 brightness: Brightness.dark,
               ),
@@ -119,38 +135,39 @@ class _MyAppState extends State<MyApp> {
             ),
             home: SplashScreen(),
             builder: (context, child) {
-
               return Stack(
                 children: [
                   child,
                   AnimatedPositioned(
-
                     left: _offset.dx,
                     top: _offset.dy,
                     duration: Duration(milliseconds: 200),
-                   // curve: Curves.fastOutSlowIn,
                     child: GestureDetector(
                       onTap: (){
                         setState(() {
                           _offset = Offset((MediaQuery.of(context).size.width/2 )- 30.w, MediaQuery.of(context).size.height-50);
                         });
                         Future.delayed(Duration(milliseconds: 250),(){
-                          Helpers.bottomSheet(context: context, child:/*Container(height: 200 ,width: 500,)*/ BottomSheetMessages());
-                        });
+                          Helpers.bottomSheet(context: context, child: BottomSheetMessages());
+                        }
+                        );
                       },
+
                       onPanUpdate: (d) {
                         print('d.delta.dx ${d.delta.dx}  d.delta.dy ${d.delta.dy}');
-                        setState(() => _offset += Offset(d.delta.dx, d.delta.dy));
+                        setState( () => _offset += Offset(d.delta.dx, d.delta.dy) );
                       },
+
                       child: Container(
                         height: 50.w,
                         width: 50.w,
-                       // padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.lightBlue,
                         ),
-                        child: Center(child: Icon(Icons.chat,color: Colors.white,)),
+                        child: Center(
+                            child: Icon(Icons.chat,color: Colors.white,)
+                        ),
                       ),
                     ),
                   ),
@@ -189,7 +206,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(milliseconds:3000 , ) ,(){
       print("run Duration") ;
      // navigateAndFinish(context , HomeScreen() ,notifier: HomeNotifier()) ;
-      CustomNavigate<AdsNotifier>().navigateAndFinish(context,  AdsScreen(), create: (context) =>AdsNotifier());
+      if(getUser()!=null){
+        CustomNavigate<HomeNotifier>().navigateAndFinish(context,  HomeScreen(), create: (_) =>HomeNotifier());
+      }else{
+        CustomNavigate<AdsNotifier>().navigateAndFinish(context,  AdsScreen(), create: (_) =>AdsNotifier());
+
+      }
 
     //  CustomNavigate<HomeNotifier>().navigateAndFinish(context,  HomeScreen(), create: (context) =>HomeNotifier());
     });

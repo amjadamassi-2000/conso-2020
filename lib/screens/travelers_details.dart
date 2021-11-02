@@ -4,7 +4,7 @@ import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/Spinner.dart';
 import 'package:conso_customer/shared/components/cardFormArrow.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
@@ -55,7 +55,7 @@ class _TravelersDetailsState extends State<TravelersDetails> with SingleTickerPr
                    SizedBox(width: 5.w,),
                    Expanded(
                      flex: 1,
-                     child: defaultButton(
+                     child: DefaultButton(
                        height: 30.h,
                        isFittedText: true,
                        isExpanded: false,
@@ -78,7 +78,7 @@ class _TravelersDetailsState extends State<TravelersDetails> with SingleTickerPr
          SizedBox(height: 20.h,),
          Padding(
            padding: EdgeInsets.symmetric(horizontal: 30.w),
-           child: defaultButton(onPressed: () {
+           child: DefaultButton(onPressed: () {
 
 
            }, text: 'reservation_confirmation'.t,),
@@ -138,7 +138,7 @@ class _TravelersDetailsState extends State<TravelersDetails> with SingleTickerPr
                           SizedBox(height: 20.h,) ,
 
 
-                          defaultButton(onPressed: (){
+                          DefaultButton(onPressed: (){
                             setState(() {
                               isFirst = false ;
                             });

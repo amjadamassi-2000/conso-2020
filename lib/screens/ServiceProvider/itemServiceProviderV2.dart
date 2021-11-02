@@ -1,7 +1,7 @@
 import 'package:conso_customer/screens/ServiceProvider/ServiceProvidersDetails.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +15,7 @@ class itemServiceProvidersV2 extends StatelessWidget {
         To(context, ServiceProvidersDetails(name: 'cfhsc',));
       },
       child: Container(
-        // height: 100,
-        // color: Colors.black87,
+
         margin: EdgeInsets.all( 10.h),
         width: MediaQuery.of(context).size.width*0.90,
         child: Stack(
@@ -31,6 +30,7 @@ class itemServiceProvidersV2 extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
+
                     padding: EdgeInsetsDirectional.only(start: 50.w, top: 30.h , bottom:  20.h , end: 10.w),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
@@ -55,32 +55,40 @@ class itemServiceProvidersV2 extends StatelessWidget {
                         SizedBox(
                           height: 15.h,
                         ),
-                        //Spacer() ,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.max,
+
                           children: [
-                            defaultButton(
+                            DefaultButton(
                               onPressed: () {},
-                              fontSize: 15.sp,
+                              fontSize: 12.sp,
                               text: 'start_chatting'.t,
                               height: 35.h,
                               isShadow: false,
                               isExpanded: false,
                               icon: svgImage('chat_btn', color: Colors.white, size: 15),
                             ),
+
+
                             SizedBox(
-                              width: 8.w,
+                              width: 5.w,
                             ),
-                            defaultButton(
-                                onPressed: () {},
-                                fontSize: 15.sp,
-                                isExpanded: false,
-                                text: 'start_calling'.t,
-                                 height: 35.h,
-                                isShadow: false,
-                                isBorder: true,
-                                icon: svgImage('phone_call')),
+
+
+                         DefaultButton(
+                             onPressed: () {},
+                              fontSize: 12.sp,
+                              isExpanded: false,
+                              text: 'start_calling'.t,
+                               height: 35.h,
+                              isShadow: false,
+                              isBorder: true,
+                              icon: svgImage('phone_call')
+                         ),
+
+
+
                           ],
                         )
                       ],
@@ -91,6 +99,7 @@ class itemServiceProvidersV2 extends StatelessWidget {
             ),
             Positioned(
               top: 20.h,
+           //   right: 20.h,
               child: imageCircle("https://miro.medium.com/max/12000/1*PgIo7r6qQXem8BmWd-vksQ.jpeg")),
           ],
         ),

@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:conso_customer/shared/network/remote/dio_helper.dart';
 import 'package:conso_customer/shared/styles/style.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,6 +27,8 @@ SharedPreferences preferences;
 void initApp() {
   DioHelper();
 }
+
+
 
 Future<void> initPref() async {
   preferences = await SharedPreferences.getInstance();
@@ -119,6 +121,9 @@ Widget defaultTextForm(
   Function validator,
   String defaultValidator,
   TextInputType type = TextInputType.text,
+      ValueKey key,
+
+
 }) =>
     Container(
       width: double.infinity,
@@ -126,17 +131,18 @@ Widget defaultTextForm(
         borderRadius: BorderRadius.circular(
           5.0,
         ),
-      //  color: Colors.white,
+        //  color: Colors.white,
       ),
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+
       child: TextFormField(
+
         controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
             border: InputBorder.none,
             hintText: hint,
-
             hintStyle: defaultTextStyleHint(),
             prefixIcon: Row(
               mainAxisSize: MainAxisSize.min,
@@ -150,7 +156,7 @@ Widget defaultTextForm(
             //icon:icon ,
             prefixIconConstraints:
                 BoxConstraints(minWidth: 30.w, minHeight: 30.w)),
-        validator: validator ??
+                validator: validator ??
             (str) {
               return defaultValidator;
             },
@@ -158,10 +164,10 @@ Widget defaultTextForm(
       ),
     );
 
-
 Widget defaultTextFormDialog(
     TextEditingController controller,
-    String hint, {
+    String hint,
+    {
       Function onTap ,
       Widget icon,
       bool isPassword = false,
@@ -199,19 +205,9 @@ Widget defaultTextFormDialog(
               padding:  EdgeInsetsDirectional.only(start: 10.w ,end: 5.w),
               child: icon,
             ): null ,
-            // prefixIcon: Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     // icon ?? Container(),
-            //     // SizedBox(
-            //     //   width: 10.w,
-            //     // )
-            //   ],
-            // ),
-            //icon:icon ,
-            prefixIconConstraints:icon!=null? BoxConstraints(minWidth: 30.w, minHeight: 25.w,):null
+            prefixIconConstraints:icon!=null? BoxConstraints(minWidth: 30.w, minHeight: 25.w,) : null
         ),
-        validator: validator ??
+        validator : validator ??
                 (str) {
               return defaultValidator;
             },
@@ -230,7 +226,7 @@ Widget textBodyMedium(String text,
       text,
       textAlign: textAlign,
       style: TextStyle(
-        fontSize: fontSize ?? 22.sp,
+        fontSize: fontSize == null ? fontSize : fontSize-2  ?? 18.sp,
         color: color,
         fontWeight: fontWeight==null? isBold ? FontWeight.w900 : FontWeight.w600:fontWeight,
       ),
@@ -241,7 +237,7 @@ Widget textBodyBigSkinny(String text,
       double fontSize,
       Color color = defaultColor,
       TextAlign textAlign = TextAlign.center}) =>
-    textBodyMedium(text,color:color ,fontWeight: FontWeight.w600, fontSize: fontSize ?? 20.sp ,isBold: isBold  ,textAlign: textAlign );
+    textBodyMedium(text,color:color ,fontWeight: FontWeight.w600, fontSize: fontSize ?? 18.sp ,isBold: isBold  ,textAlign: textAlign );
 
 Widget textBody(String text,
         {isBold = false,
@@ -253,7 +249,7 @@ Widget textBody(String text,
       textAlign: textAlign,
       /*overflow: TextOverflow.ellipsis,*/
       style: TextStyle(
-        fontSize:fontSize?? 15.sp,
+        fontSize:fontSize?? 12.sp,
         color: color,
         fontWeight: isBold ? FontWeight.w900 : FontWeight.w600,
       ),
@@ -344,7 +340,7 @@ void buildProgress({
                 height: 20.0,
               ),
             if (error)
-              defaultButton(
+              DefaultButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -507,7 +503,7 @@ Widget buildRowSearch({Function onFilter ,Function onHelp ,Function onMap , }){
     mainAxisSize: MainAxisSize.max,
     children: [
       Expanded(
-        child: defaultButton(
+        child: DefaultButton(
           // fontSize: 20.sp,
             isShadow: false,
             isExpanded: false,
@@ -521,7 +517,7 @@ Widget buildRowSearch({Function onFilter ,Function onHelp ,Function onMap , }){
       ),
       SizedBox(width: 10.w,),
       Expanded(
-        child: defaultButton(
+        child: DefaultButton(
           // fontSize: 20.sp,
             isShadow: false,
             isExpanded: false,
@@ -535,7 +531,7 @@ Widget buildRowSearch({Function onFilter ,Function onHelp ,Function onMap , }){
       ),
       SizedBox(width: 10.w,),
       Expanded(
-        child: defaultButton(
+        child: DefaultButton(
           // fontSize: 20.sp,
             isShadow: false,
             isExpanded: false,

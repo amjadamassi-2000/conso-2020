@@ -2,7 +2,7 @@ import 'package:conso_customer/screens/Home/select_dates.dart';
 import 'package:conso_customer/shared/colors/colors_common.dart';
 import 'package:conso_customer/shared/components/Spinner.dart';
 import 'package:conso_customer/shared/components/components.dart';
-import 'package:conso_customer/shared/components/defaultButton.dart';
+import 'package:conso_customer/shared/components/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:conso_customer/extensions_lang.dart';
@@ -208,7 +208,7 @@ class _GuestDetailsState extends State<GuestDetails> {
                     SizedBox(width: 5.w,),
                     Expanded(
                       flex: 1,
-                      child: defaultButton(
+                      child: DefaultButton(
                         height: 30.h,
                         isFittedText: true,
                         isExpanded: false,
@@ -231,7 +231,7 @@ class _GuestDetailsState extends State<GuestDetails> {
           SizedBox(height: 20.h,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w),
-            child: defaultButton(onPressed: () {
+            child: DefaultButton(onPressed: () {
 
             }, text: 'reservation_confirmation'.t,),
           ),
@@ -371,7 +371,7 @@ class _GuestDetailsState extends State<GuestDetails> {
                 visible: isFirst,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
-                  child: defaultButton(onPressed: () {
+                  child: DefaultButton(onPressed: () {
                     setState(() {
                       myWdget = BuildMyWidget2() ;
                       isFirst = false ;
